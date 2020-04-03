@@ -6,6 +6,7 @@ import android.util.Log
 import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.DefaultItemAnimator
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.gson.JsonArray
 import com.koushikdutta.ion.Ion
@@ -19,7 +20,8 @@ class ActivityList : AppCompatActivity() {
     private var context: Context = this
 
     private lateinit var data:JsonArray
-    private lateinit var linearLayoutManager: LinearLayoutManager
+    //private lateinit var linearLayoutManager: LinearLayoutManager
+    private lateinit var gridLayoutManager: GridLayoutManager
     private lateinit var adapter:AdapterList
 
 
@@ -63,15 +65,19 @@ class ActivityList : AppCompatActivity() {
     }
 
     fun initializeList(){
-        linearLayoutManager = LinearLayoutManager(context)
-        linearLayoutManager.orientation = LinearLayoutManager.VERTICAL
-        linearLayoutManager.scrollToPosition(0)
+        //linearLayoutManager = LinearLayoutManager(context)
+        //linearLayoutManager.orientation = LinearLayoutManager.VERTICAL
+        //linearLayoutManager.scrollToPosition(0)
+
+        gridLayoutManager = GridLayoutManager(this,3)
+        gridLayoutManager.orientation = GridLayoutManager.VERTICAL
+        gridLayoutManager.scrollToPosition(0)
 
 
         adapter = AdapterList()
         adapter.AdapterList(context,data)
 
-        recycler_view_list.layoutManager = linearLayoutManager
+        recycler_view_list.layoutManager = gridLayoutManager
         recycler_view_list.adapter = adapter
         recycler_view_list.setHasFixedSize(true)
         recycler_view_list.itemAnimator = DefaultItemAnimator()
